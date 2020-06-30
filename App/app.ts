@@ -16,5 +16,9 @@ const server = app.listen(PORT, () => console.log(`server listening to port ${PO
 const io = socket(server);
 
 io.on("connection", (socket) => {
-    console.log(`socket connection established. id: ${socket.id}`)
-})
+    console.log(`socket connection established. id: ${socket.id}`);
+
+    socket.on("chat", (data) => {
+        io.sockets.emit("chat", data);
+    });
+});
